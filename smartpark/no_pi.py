@@ -15,6 +15,7 @@ if __name__ == '__main__':
 
     display=carparkDisplay.CarParkDisplay(root, title=carpark_manager.location)
     display.data_provider=carpark_manager
+    # register display to carpark_manager so it can call update from carpark_manager
     carpark_manager.register_display(display)
 
     detector=carparkDetector.CarDetectorWindow(root)
