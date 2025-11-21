@@ -37,10 +37,15 @@ class CarparkManager(CarparkSensorListener,CarparkDataProvider):
     
     @property
     def available_spaces(self):
+        """
+            Get the latest value of available_spaces (the newest updated value)
+            Not saved as a variable, like temperature, to avoid the value restart from total spaces
+            in the case of app crash. Reading from the log so the latest value can be received.
+            If user wants to restart the count, can just delete/rename the log and start from the new number
+        """
         with open(self.log_file, "r") as file:
             data = json.load(file)
-
-        # get the very first value of available_spaces (the newest updated value)
+        
         for record in data:
             if record.get("available_spaces") is not None:
                 if record.get("available_spaces") > 0:
@@ -63,6 +68,11 @@ class CarparkManager(CarparkSensorListener,CarparkDataProvider):
     
     
     def incoming_car(self,license_plate):
+        """
+            Check if the car already exist, if yes, then return error
+            If not exist, then write to the log and update the available space
+            Call the update_display method to update the display
+        """
         license_plate = license_plate.strip().upper()  # standardized
         car = self.active_cars.get(license_plate)
         # check if car already exist
@@ -103,6 +113,12 @@ class CarparkManager(CarparkSensorListener,CarparkDataProvider):
 
 
     def outgoing_car(self,license_plate):
+        """
+            Check if the car exist, if no, then return error
+            If it exists, then write to the log and update the available space
+            Call the update_display method to update the display
+        """
+
         license_plate = license_plate.strip().upper()
         car = self.active_cars.get(license_plate)
 
@@ -150,6 +166,12 @@ class CarparkManager(CarparkSensorListener,CarparkDataProvider):
             self._display.update_display()
 
 class Car:
+    """
+        Car, contains: 
+        - license plate
+        - entry time
+        - exit time
+    """
     def __init__(self,plate=None):
         self.license_plate = plate
         self.entry_time = None

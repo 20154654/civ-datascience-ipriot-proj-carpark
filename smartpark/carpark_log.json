@@ -1,0 +1,32 @@
+[
+    {
+        "available_spaces": 190,
+        "license_plate": "1ABC1",
+        "enter_time": "2025/11/21 11:29:05",
+        "exit_time": null
+    },
+    {
+        "available_spaces": 191,
+        "license_plate": "1ABC1",
+        "enter_time": null,
+        "exit_time": "2025/11/21 11:29:03"
+    },
+    {
+        "available_spaces": 190,
+        "license_plate": "1ABC1",
+        "enter_time": "2025/11/21 11:29:02",
+        "exit_time": null
+    },
+    {
+        "available_spaces": 191,
+        "license_plate": "1ABC",
+        "enter_time": "2025/11/21 11:28:58",
+        "exit_time": null
+    },
+    {
+        "available_spaces": 192,
+        "license_plate": null,
+        "enter_time": null,
+        "exit_time": null
+    }
+]

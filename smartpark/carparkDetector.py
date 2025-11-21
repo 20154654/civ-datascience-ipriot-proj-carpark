@@ -40,6 +40,9 @@ class CarDetectorWindow:
     
 
     def _on_temp_change(self, *args):
+        """
+        Check if the input value is valid
+        """
         value = self.temp_var.get().strip()
 
         if value =="":

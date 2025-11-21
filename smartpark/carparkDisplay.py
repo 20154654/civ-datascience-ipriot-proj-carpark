@@ -25,6 +25,9 @@ class CarParkDisplay:
             self.update_display
 
     def update_display(self):
+        """
+        Update and display the latest values.
+        """
         field_values = dict(zip(CarParkDisplay.fields, [
             f'{self._provider.available_spaces:03d}',
             # update so the temperature not formated into integer but float
