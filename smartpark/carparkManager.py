@@ -43,8 +43,10 @@ class CarparkManager(CarparkSensorListener,CarparkDataProvider):
         # get the very first value of available_spaces (the newest updated value)
         for record in data:
             if record.get("available_spaces") is not None:
-                return record.get("available_spaces")
-            
+                if record.get("available_spaces") > 0:
+                    return record.get("available_spaces")
+                else:
+                    return 0
         return None
     
     @property
