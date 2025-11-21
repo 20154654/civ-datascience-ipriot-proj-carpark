@@ -1,0 +1,3 @@
+location=Moondalup City Square
+total_spaces=190
+log_file=carpark_log.json

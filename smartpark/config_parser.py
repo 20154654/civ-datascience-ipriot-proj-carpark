@@ -32,10 +32,29 @@ Finally, you can use `yaml` if you prefer.
 
 
 """
-
+import os
 
 
 def parse_config(config_file: str) -> dict:
     """Parse the config file and return the values as a dictionary"""
-    # TODO: get the configuration from a parsed file
-    return {'location': 'TBD', 'total_spaces': 0, 'log_file':'carpark_log.txt' }
+    # receiving carpark_config.txt
+
+    script_dir = os.path.dirname(os.path.abspath(__file__))  # folder of this script
+    config_path = os.path.join(script_dir, config_file)
+
+    with open(config_path,"r") as file:
+        lines = file.readlines()
+
+    # read the data into a list
+    config = {}
+
+    for line in lines:
+        line = line.strip()
+        if "=" in line:
+            key,value = line.split("=",1)  # splits each line into key and value only once (in case the value contains =).
+            config[key.strip()] = value.strip()
+
+    location = config.get("location")
+    total_spaces = int(config.get("total_spaces",0))
+    log_file = config.get("log_file")
+    return {'location': location, 'total_spaces': total_spaces, 'log_file':log_file }

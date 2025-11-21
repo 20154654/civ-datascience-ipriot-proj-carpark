@@ -23,12 +23,12 @@ import time
         * The current temperature
     
 '''
-class MockCarparkManager(CarparkSensorListener,CarparkDataProvider):
+class CarparkManager(CarparkSensorListener,CarparkDataProvider):
     #constant, for where to get the configuration data
     CONFIG_FILE = "carpark_config.txt"
 
     def __init__(self):
-        configuration = parse_config(MockCarparkManager.CONFIG_FILE)
+        configuration = parse_config(CarparkManager.CONFIG_FILE)
 
     @property
     def available_spaces(self):
