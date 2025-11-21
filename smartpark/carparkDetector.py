@@ -20,6 +20,7 @@ class CarDetectorWindow:
         )
         self.temp_label.grid(padx=10, pady=5,column=0,row=2)
         self.temp_var=tk.StringVar()
+        # update original code so the temperature only update when the value is valid
         self.temp_var.trace_add("write", self._on_temp_change)
         #self.temp_var.trace_add("write",lambda x,y,v: self.temperature_changed(float(self.temp_var.get())))
         self.temp_box=tk.Entry(

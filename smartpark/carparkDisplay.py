@@ -12,9 +12,6 @@ class CarParkDisplay:
     def __init__(self,root, title: str):
         self.window = WindowedDisplay(root,
             title, CarParkDisplay.fields)
-        #updater = threading.Thread(target=self.check_updates)
-        #updater.daemon = True
-        #updater.start()
         self.window.show()
         self._provider=None
     
@@ -30,6 +27,7 @@ class CarParkDisplay:
     def update_display(self):
         field_values = dict(zip(CarParkDisplay.fields, [
             f'{self._provider.available_spaces:03d}',
+            # update so the temperature not formated into integer but float
             #f'{self._provider.temperature:02d}℃',
             f'{self._provider.temperature:.1f}℃',
             time.strftime("%H:%M:%S",self._provider.current_time)
