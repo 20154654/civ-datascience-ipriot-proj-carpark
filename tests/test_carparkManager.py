@@ -1,9 +1,17 @@
 import os
 import json
+import sys
 import unittest
 
-import carparkManager
-from carparkManager import CarparkManager
+# this is to make sure 
+# the tests treat the smartpark folder as if it were the current directory
+CURRENT_DIR = os.path.dirname(__file__)
+SMARTPARK_DIR = os.path.join(CURRENT_DIR, "..", "smartpark")
+sys.path.insert(0, os.path.abspath(SMARTPARK_DIR))
+
+import smartpark.carparkManager
+from smartpark.carparkManager import CarparkManager
+
 
 class TestCarparkManager(unittest.TestCase):
 
@@ -13,7 +21,7 @@ class TestCarparkManager(unittest.TestCase):
         pass fake parse_config() to CarparkManager
         """
         # keep the setting for restoring later
-        self._original_parse_config = carparkManager.parse_config
+        self._original_parse_config = smartpark.carparkManager.parse_config
 
         def fake_parse_config(_):
             # This is what your config file would normally return
@@ -23,10 +31,10 @@ class TestCarparkManager(unittest.TestCase):
                 "log_file": "test_log.json",
             }
 
-        carparkManager.parse_config = fake_parse_config
+        smartpark.carparkManager.parse_config = fake_parse_config
 
         # make sure the log file is clean
-        self.script_dir = os.path.dirname(os.path.abspath(carparkManager.__file__))
+        self.script_dir = os.path.dirname(os.path.abspath(smartpark.carparkManager.__file__))
         self.log_path = os.path.join(self.script_dir, "test_log.json")
         if os.path.exists(self.log_path):
             os.remove(self.log_path)
@@ -35,7 +43,7 @@ class TestCarparkManager(unittest.TestCase):
 
     def tearDown(self):
         # remove any logfile generated during test, just in case
-        carparkManager.parse_config = self._original_parse_config
+        smartpark.carparkManager.parse_config = self._original_parse_config
         if os.path.exists(self.log_path):
             os.remove(self.log_path)
 
