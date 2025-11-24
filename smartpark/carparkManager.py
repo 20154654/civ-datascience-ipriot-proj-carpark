@@ -30,7 +30,7 @@ class CarparkManager(CarparkSensorListener,CarparkDataProvider):
         if not os.path.exists(self.log_file):
             with open(self.log_file, "w") as file:
                 json.dump([initial_log_data], file, indent=4)
-            print(f"Log file crated: {self.log_file}")
+            print(f"Log file created: {self.log_file}")
         else:
             print(f"Log file {self.log_file} already exist!")
 
